@@ -1,2 +1,3 @@
 # next-fpsmenu
-Fivem Fps Boost Script
+Next Store olarak geliştirdiğimiz FPS Boost sistemimiz
+
