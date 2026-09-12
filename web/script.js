@@ -1,15 +1,7 @@
-// ===================================================================================
-// NEXT FPS BOOSTER - Modern NUI Script
-// Handles dynamic locales, presets, live FPS widget, and responsive switches
-// ===================================================================================
-
 function getResourceName() {
     return typeof window.GetParentResourceName === 'function' ? GetParentResourceName() : 'next-fpsmenu';
 }
 
-// -----------------------------------------------------------------------------------
-// Lua Veri İletişim Yardımcısı (Fetch + JSON Content-Type garantisi)
-// -----------------------------------------------------------------------------------
 function sendNuiData(event, data) {
     let url = `https://${getResourceName()}/${event}`;
     try {
@@ -27,9 +19,6 @@ function sendNuiData(event, data) {
     }
 }
 
-// -----------------------------------------------------------------------------------
-// Dil / Locale Uygulayıcı
-// -----------------------------------------------------------------------------------
 function applyLocale(localeData) {
     if (!localeData) return;
 
@@ -48,9 +37,6 @@ function applyLocale(localeData) {
     });
 }
 
-// -----------------------------------------------------------------------------------
-// Switch Durumunu Güncelleyici (Kaydırma ve Renkler)
-// -----------------------------------------------------------------------------------
 function updateSwitchState(key, isEnabled) {
     let indicator = $(`#${key}`);
     let onBtn = $(`#${key}ON`);
@@ -69,16 +55,10 @@ function updateSwitchState(key, isEnabled) {
     }
 }
 
-// -----------------------------------------------------------------------------------
-// Canlı FPS - client.lua'dan gelen gerçek oyun içi FPS değerini ekrana basar
-// -----------------------------------------------------------------------------------
 function resetFpsDisplay() {
     $("#fpsVal").text("--");
 }
 
-// -----------------------------------------------------------------------------------
-// Switch Tıklama Olayı (Bireysel Ayarlar)
-// -----------------------------------------------------------------------------------
 $(document).on("click", ".switchOption", function() {
     let id = $(this).attr("id");
     if (!id) return;
@@ -89,7 +69,6 @@ $(document).on("click", ".switchOption", function() {
     updateSwitchState(optionKey, isEnabled);
     $(".presetCard").removeClass("active");
 
-    // Ultra Gerçekçi Anahtarı Açıldığında Arayüzü Senkronize Et
     if (optionKey === "realismMaster") {
         if (isEnabled) {
             updateSwitchState("realismLod", true);
@@ -117,9 +96,6 @@ $(document).on("click", ".switchOption", function() {
     });
 });
 
-// -----------------------------------------------------------------------------------
-// Sayfa Değiştirme (Tabs: Booster vs Grafik Paketi)
-// -----------------------------------------------------------------------------------
 $(document).on("click", ".navTab", function() {
     let tab = $(this).attr("data-tab");
     if (!tab) return;
@@ -136,9 +112,6 @@ $(document).on("click", ".navTab", function() {
     }
 });
 
-// -----------------------------------------------------------------------------------
-// Paket (Pack) & Görsel Stil Seçimi - Canlı Model/Prop Değişimi
-// -----------------------------------------------------------------------------------
 function updateActiveStyle(style) {
     $(".styleCard").removeClass("active");
     let target = $(`.styleCard[data-style="${style}"]`);
@@ -155,7 +128,6 @@ $(document).on("click", ".styleCard", function() {
 
     updateActiveStyle(pack);
 
-    // Pakete tıklandığında Ultra Gerçekçi modunu UI'da anında aktif et
     updateSwitchState("realismMaster", true);
     updateSwitchState("realismLod", true);
     updateSwitchState("realismModels", true);
@@ -169,7 +141,6 @@ $(document).on("click", ".styleCard", function() {
 
     $("#presetRealism").addClass("active");
 
-    // Lua'ya veriyi anında ilet
     sendNuiData("changeGraphicPack", {
         pack: pack
     });
@@ -178,9 +149,6 @@ $(document).on("click", ".styleCard", function() {
     });
 });
 
-// -----------------------------------------------------------------------------------
-// Hazır Profil (Preset) Tıklama Olayı
-// -----------------------------------------------------------------------------------
 $(document).on("click", ".presetCard", function() {
     let preset = $(this).attr("data-preset");
     if (!preset) return;
@@ -194,7 +162,6 @@ $(document).on("click", ".presetCard", function() {
         $("#pageBooster").hide();
         $("#pageRealism").fadeIn(180);
 
-        // Ultra Gerçekçi seçildiğinde arayüzdeki tüm ayarları anında en yükseğe senkronize et
         updateSwitchState("realismMaster", true);
         updateSwitchState("realismLod", true);
         updateSwitchState("realismModels", true);
@@ -212,9 +179,6 @@ $(document).on("click", ".presetCard", function() {
     });
 });
 
-// -----------------------------------------------------------------------------------
-// Ayarları Arayüze Toplu Dağıtma Fonksiyonu
-// -----------------------------------------------------------------------------------
 function applyAllSettings(settings) {
     if (!settings) return;
 
@@ -233,24 +197,18 @@ function applyAllSettings(settings) {
     }
 }
 
-// -----------------------------------------------------------------------------------
-// Lua Mesaj Dinleyicisi (OpenMenu, UpdateSettings, SetLocale)
-// -----------------------------------------------------------------------------------
 window.addEventListener('message', function (event) {
     let data = event.data;
     if (!data) return;
 
-    // Dil Paketi Güncelleme
     if (data.locale) {
         applyLocale(data.locale);
     }
 
-    // Başlık Güncelleme (Config.MenuTitle)
     if (data.title) {
         $("#headerTitle").text(data.title);
     }
 
-    // Menüyü Aç
     if (data.action === "openMenu") {
         if (data.settings) {
             applyAllSettings(data.settings);
@@ -260,14 +218,12 @@ window.addEventListener('message', function (event) {
         $(".hider").fadeIn(220);
     }
 
-    // Gerçek Oyun İçi FPS Güncellemesi (client.lua'dan gelen)
     if (data.action === "updateFps") {
         if (data.fps !== undefined) {
             $("#fpsVal").text(data.fps);
         }
     }
 
-    // Toplu Ayar Güncelleme (Preset Seçildiğinde)
     if (data.action === "updateSettings") {
         if (data.settings) {
             applyAllSettings(data.settings);
@@ -275,9 +231,6 @@ window.addEventListener('message', function (event) {
     }
 });
 
-// -----------------------------------------------------------------------------------
-// Menüyü Kapatma (ESC Tuşu ve Kapat Butonu)
-// -----------------------------------------------------------------------------------
 function closeMenu() {
     resetFpsDisplay();
     $(".hider").fadeOut(200);
