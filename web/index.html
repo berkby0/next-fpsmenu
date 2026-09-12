@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Next FPS Boost</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+</head>
+
+<body>
+
+    <div class="hider">
+        <div class="mainMenu">
+            <div class="ambientGlow"></div>
+
+            <div class="menuHeader">
+                <div class="headerLeft">
+                    <img src="assets/logo.png" alt="Next Fps" class="headerLogo">
+                    <span class="headerTitle" id="headerTitle">NextFps</span>
+                </div>
+                <div class="headerRight">
+                    <div class="fpsWidget" title="FPS">
+                        <span class="fpsDot"></span>
+                        <span class="fpsNum" id="fpsVal">--</span>
+                        <span class="fpsLabel" data-loc="live_fps">FPS</span>
+                    </div>
+
+                    <div class="closeBtn" id="closeBtn" title="Close" data-loc-title="close">
+                        <span class="escLabel" data-loc="esc_key">ESC</span>
+                        <svg class="closeIcon" width="14" height="14" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                            <line x1="18" y1="6" x2="6" y2="18"></line>
+                            <line x1="6" y1="6" x2="18" y2="18"></line>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+
+            <div class="navTabs">
+                <button class="navTab active" data-tab="booster" id="tabBooster">
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+                    </svg>
+                    <span data-loc="tab_booster">FPS BOOSTER</span>
+                </button>
+                <button class="navTab" data-tab="realism" id="tabRealism">
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M6 3h12l4 6-10 12L2 9z"></path>
+                        <path d="M12 21L8 9l4-6 4 6-4 12z"></path>
+                    </svg>
+                    <span data-loc="tab_realism">GRAFİK PAKETİ</span>
+                </button>
+            </div>
+
+            <div class="presetsSection">
+                <div class="presetsHeader">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#38bdf8" stroke-width="2.5"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+                    </svg>
+                    <span class="presetsLabel" data-loc="presets_title">HAZIR FPS SEÇİMLERİ</span>
+                </div>
+                <div class="presetsList">
+                    <button class="presetCard" data-preset="ultra" id="presetUltra">
+                        <div class="presetIcon ultra">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+                            </svg>
+                        </div>
+                        <div class="presetText">
+                            <span class="presetTitle" data-loc="preset_ultra">Maksimum FPS</span>
+                            <span class="presetDesc" data-loc="preset_ultra_desc">Ultra Boost Paketi</span>
+                        </div>
+                    </button>
+
+                    <button class="presetCard" data-preset="balanced" id="presetBalanced">
+                        <div class="presetIcon balanced">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                <circle cx="12" cy="12" r="10"></circle>
+                                <polyline points="12 6 12 12 16 14"></polyline>
+                            </svg>
+                        </div>
+                        <div class="presetText">
+                            <span class="presetTitle" data-loc="preset_balanced">Dengeli Mod</span>
+                            <span class="presetDesc" data-loc="preset_balanced_desc">Önerilen Performans</span>
+                        </div>
+                    </button>
+
+                    <button class="presetCard" data-preset="default" id="presetDefault">
+                        <div class="presetIcon default">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"></path>
+                                <path d="M3 3v5h5"></path>
+                            </svg>
+                        </div>
+                        <div class="presetText">
+                            <span class="presetTitle" data-loc="preset_default">Varsayılan</span>
+                            <span class="presetDesc" data-loc="preset_default_desc">Orijinal GTA V Grafikleri</span>
+                        </div>
+                    </button>
+
+                    <button class="presetCard" data-preset="realism" id="presetRealism">
+                        <div class="presetIcon realism">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                <polygon
+                                    points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2">
+                                </polygon>
+                            </svg>
+                        </div>
+                        <div class="presetText">
+                            <span class="presetTitle" data-loc="preset_realism">Canlı Grafik Paketi</span>
+                            <span class="presetDesc" data-loc="preset_realism_desc">Ultra Gerçekçi HD</span>
+                        </div>
+                    </button>
+                </div>
+            </div>
+
+            <div class="pageView active" id="pageBooster">
+                <div class="optionsGrid">
+                    <div class="options">
+                        <div class="optionLabel categoryHeader">
+                            <div class="categoryIcon">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
+                                    <line x1="8" y1="21" x2="16" y2="21"></line>
+                                    <line x1="12" y1="17" x2="12" y2="21"></line>
+                                </svg>
+                            </div>
+                            <div class="categoryTitleWrap">
+                                <span class="categoryTitle" data-loc="cat_main">MAIN OPTIONS</span>
+                                <span class="categoryDesc" data-loc="cat_main_desc">Entities & Objects</span>
+                            </div>
+                        </div>
+
+                        <div class="child">
+                            <div class="text" data-loc="peds">Optimize Peds</div>
+                            <div class="switch">
+                                <div class="flex">
+                                    <div class="switchOption" id="pedsON" data-loc="switch_on">ON</div>
+                                    <div class="switchOption selectedOFF" id="pedsOFF" data-loc="switch_off">OFF</div>
+                                </div>
+                                <div class="switchIndicator" id="peds"></div>
+                            </div>
+                        </div>
+
+                        <div class="child">
+                            <div class="text" data-loc="vehicles">Optimize Vehicles</div>
+                            <div class="switch">
+                                <div class="flex">
+                                    <div class="switchOption" id="vehiclesON" data-loc="switch_on">ON</div>
+                                    <div class="switchOption selectedOFF" id="vehiclesOFF" data-loc="switch_off">OFF
+                                    </div>
+                                </div>
+                                <div class="switchIndicator" id="vehicles"></div>
+                            </div>
+                        </div>
+
+                        <div class="child">
+                            <div class="text" data-loc="objects">Optimize Objects</div>
+                            <div class="switch">
+                                <div class="flex">
+                                    <div class="switchOption" id="objectsON" data-loc="switch_on">ON</div>
+                                    <div class="switchOption selectedOFF" id="objectsOFF" data-loc="switch_off">OFF
+                                    </div>
+                                </div>
+                                <div class="switchIndicator" id="objects"></div>
+                            </div>
+                        </div>
+
+                        <div class="child">
+                            <div class="text" data-loc="particles">Remove Particles</div>
+                            <div class="switch">
+                                <div class="flex">
+                                    <div class="switchOption" id="particlesON" data-loc="switch_on">ON</div>
+                                    <div class="switchOption selectedOFF" id="particlesOFF" data-loc="switch_off">OFF
+                                    </div>
+                                </div>
+                                <div class="switchIndicator" id="particles"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="options" id="center">
+                        <div class="optionLabel categoryHeader">
+                            <div class="categoryIcon">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path
+                                        d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z">
+                                    </path>
+                                </svg>
+                            </div>
+                            <div class="categoryTitleWrap">
+                                <span class="categoryTitle" data-loc="cat_other">OTHER OPTIONS</span>
+                                <span class="categoryDesc" data-loc="cat_other_desc">Effects & Cleanup</span>
+                            </div>
+                        </div>
+
+                        <div class="child">
+                            <div class="text" data-loc="broken">Disable Broken Glass</div>
+                            <div class="switch">
+                                <div class="flex">
+                                    <div class="switchOption" id="brokenON" data-loc="switch_on">ON</div>
+                                    <div class="switchOption selectedOFF" id="brokenOFF" data-loc="switch_off">OFF</div>
+                                </div>
+                                <div class="switchIndicator" id="broken"></div>
+                            </div>
+                        </div>
+
+                        <div class="child">
+                            <div class="text" data-loc="ped">Clear Ped Damage & Dirt</div>
+                            <div class="switch">
+                                <div class="flex">
+                                    <div class="switchOption" id="pedON" data-loc="switch_on">ON</div>
+                                    <div class="switchOption selectedOFF" id="pedOFF" data-loc="switch_off">OFF</div>
+                                </div>
+                                <div class="switchIndicator" id="ped"></div>
+                            </div>
+                        </div>
+
+                        <div class="child">
+                            <div class="text" data-loc="unnecessary">Various Optimizations</div>
+                            <div class="switch">
+                                <div class="flex">
+                                    <div class="switchOption" id="unnecessaryON" data-loc="switch_on">ON</div>
+                                    <div class="switchOption selectedOFF" id="unnecessaryOFF" data-loc="switch_off">OFF
+                                    </div>
+                                </div>
+                                <div class="switchIndicator" id="unnecessary"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="options">
+                        <div class="optionLabel categoryHeader">
+                            <div class="categoryIcon">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <circle cx="12" cy="12" r="10"></circle>
+                                    <line x1="2" y1="12" x2="22" y2="12"></line>
+                                    <path
+                                        d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z">
+                                    </path>
+                                </svg>
+                            </div>
+                            <div class="categoryTitleWrap">
+                                <span class="categoryTitle" data-loc="cat_world">WORLD OPTIONS</span>
+                                <span class="categoryDesc" data-loc="cat_world_desc">Weather & Visuals</span>
+                            </div>
+                        </div>
+
+                        <div class="child">
+                            <div class="text" data-loc="rain">Disable Rain & Wind</div>
+                            <div class="switch">
+                                <div class="flex">
+                                    <div class="switchOption" id="rainON" data-loc="switch_on">ON</div>
+                                    <div class="switchOption selectedOFF" id="rainOFF" data-loc="switch_off">OFF</div>
+                                </div>
+                                <div class="switchIndicator" id="rain"></div>
+                            </div>
+                        </div>
+
+                        <div class="child">
+                            <div class="text" data-loc="shadows">Optimize Shadows</div>
+                            <div class="switch">
+                                <div class="flex">
+                                    <div class="switchOption" id="shadowsON" data-loc="switch_on">ON</div>
+                                    <div class="switchOption selectedOFF" id="shadowsOFF" data-loc="switch_off">OFF
+                                    </div>
+                                </div>
+                                <div class="switchIndicator" id="shadows"></div>
+                            </div>
+                        </div>
+
+                        <div class="child">
+                            <div class="text" data-loc="lights">Optimize Lights</div>
+                            <div class="switch">
+                                <div class="flex">
+                                    <div class="switchOption" id="lightsON" data-loc="switch_on">ON</div>
+                                    <div class="switchOption selectedOFF" id="lightsOFF" data-loc="switch_off">OFF</div>
+                                </div>
+                                <div class="switchIndicator" id="lights"></div>
+                            </div>
+                        </div>
+
+                        <div class="child">
+                            <div class="text" data-loc="lowTexture">Low Texture Quality</div>
+                            <div class="switch">
+                                <div class="flex">
+                                    <div class="switchOption" id="lowTextureON" data-loc="switch_on">ON</div>
+                                    <div class="switchOption selectedOFF" id="lowTextureOFF" data-loc="switch_off">OFF
+                                    </div>
+                                </div>
+                                <div class="switchIndicator" id="lowTexture"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pageView" id="pageRealism" style="display: none;">
+                <div class="realismContainer">
+                    <div class="realismHeroBanner">
+                        <div class="bannerLeft">
+                            <div class="bannerIconWrap">
+                                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#38bdf8"
+                                    stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                                    <polygon
+                                        points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2">
+                                    </polygon>
+                                </svg>
+                            </div>
+                            <div class="bannerText">
+                                <div class="bannerTitleRow">
+                                    <span class="bannerTitle" data-loc="realism_banner_title">Ultra Canlı & Gerçekçi
+                                        Grafik Paketi</span>
+                                </div>
+                                <span class="bannerDesc" data-loc="realism_banner_desc">Harici grafik modu (QuantV /
+                                    NVE) kurmadan canlı renkler, sinematik kontrast ve ultra grafikler
+                                    aktifleşir.</span>
+                            </div>
+                        </div>
+                        <div class="switch">
+                            <div class="flex">
+                                <div class="switchOption" id="realismMasterON" data-loc="switch_on">AÇIK</div>
+                                <div class="switchOption selectedOFF" id="realismMasterOFF" data-loc="switch_off">KAPALI
+                                </div>
+                            </div>
+                            <div class="switchIndicator" id="realismMaster"></div>
+                        </div>
+                    </div>
+
+                    <div class="realismSection">
+                        <div class="stylesGrid">
+                            <div class="styleCard active" data-style="vibrant" id="styleVibrant">
+                                <div class="styleCardTop">
+                                    <span class="styleEmoji">🌈</span>
+                                    <span class="styleTitle" data-loc="style_vibrant">Reshade Pack</span>
+                                    <span class="styleActiveIndicator"></span>
+                                </div>
+                                <span class="styleDesc" data-loc="style_vibrant_desc">Yüksek renk doygunluğu ve parlak
+                                    tonlar</span>
+                            </div>
+
+                            <div class="styleCard" data-style="cinematic" id="styleCinematic">
+                                <div class="styleCardTop">
+                                    <span class="styleEmoji">🎬</span>
+                                    <span class="styleTitle" data-loc="style_cinematic">Sinematik Pack</span>
+                                    <span class="styleActiveIndicator"></span>
+                                </div>
+                                <span class="styleDesc" data-loc="style_cinematic_desc">Derin kontrast ve sinema
+                                    kalitesi</span>
+                            </div>
+
+                            <div class="styleCard" data-style="natural" id="styleNatural">
+                                <div class="styleCardTop">
+                                    <span class="styleEmoji">🌿</span>
+                                    <span class="styleTitle" data-loc="style_natural">QuantV Pack</span>
+                                    <span class="styleActiveIndicator"></span>
+                                </div>
+                                <span class="styleDesc" data-loc="style_natural_desc">Gerçekçi gün ışığı ve doğal
+                                    atmosfer</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="realismSection">
+                        <div class="categoryHeader">
+                            <div class="categoryIcon">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
+                                    <line x1="8" y1="21" x2="16" y2="21"></line>
+                                    <line x1="12" y1="17" x2="12" y2="21"></line>
+                                </svg>
+                            </div>
+                            <div class="categoryTitleWrap">
+                                <span class="categoryTitle" data-loc="cat_realism_details">ULTRA GÖRSEL KALİTE
+                                    DETAYLARI</span>
+                                <span class="categoryDesc" data-loc="cat_realism_details_desc">Çizim Mesafesi, Modeller
+                                    ve Gölgeler</span>
+                            </div>
+                        </div>
+                        <div class="realismOptionsGrid">
+                            <div class="child">
+                                <div class="text" data-loc="realismLod">Ultra Çizim Mesafesi (LOD)</div>
+                                <div class="switch">
+                                    <div class="flex">
+                                        <div class="switchOption" id="realismLodON" data-loc="switch_on">ON</div>
+                                        <div class="switchOption selectedOFF" id="realismLodOFF" data-loc="switch_off">
+                                            OFF</div>
+                                    </div>
+                                    <div class="switchIndicator" id="realismLod"></div>
+                                </div>
+                            </div>
+
+                            <div class="child">
+                                <div class="text" data-loc="realismModels">HD Araç & Yaya Modelleri</div>
+                                <div class="switch">
+                                    <div class="flex">
+                                        <div class="switchOption" id="realismModelsON" data-loc="switch_on">ON</div>
+                                        <div class="switchOption selectedOFF" id="realismModelsOFF"
+                                            data-loc="switch_off">OFF</div>
+                                    </div>
+                                    <div class="switchIndicator" id="realismModels"></div>
+                                </div>
+                            </div>
+
+                            <div class="child">
+                                <div class="text" data-loc="realismLights">Gelişmiş Gece Işıkları & Uzak Farlar</div>
+                                <div class="switch">
+                                    <div class="flex">
+                                        <div class="switchOption" id="realismLightsON" data-loc="switch_on">ON</div>
+                                        <div class="switchOption selectedOFF" id="realismLightsOFF"
+                                            data-loc="switch_off">OFF</div>
+                                    </div>
+                                    <div class="switchIndicator" id="realismLights"></div>
+                                </div>
+                            </div>
+
+                            <div class="child">
+                                <div class="text" data-loc="realismShadows">Derin Dinamik Gölgeler</div>
+                                <div class="switch">
+                                    <div class="flex">
+                                        <div class="switchOption" id="realismShadowsON" data-loc="switch_on">ON</div>
+                                        <div class="switchOption selectedOFF" id="realismShadowsOFF"
+                                            data-loc="switch_off">OFF</div>
+                                    </div>
+                                    <div class="switchIndicator" id="realismShadows"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+<script src="script.js"></script>
+
+</html>
